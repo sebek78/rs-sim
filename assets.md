@@ -1,0 +1,10 @@
+```
+/assets
+    /fonts
+        /Lato
+            Lato_Regular.ttf
+            OFL.txt.
+        /MedievalSharp
+            MedievalSharp-Regular.ttf
+            OFL.txt
+```
