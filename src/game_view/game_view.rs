@@ -1,5 +1,4 @@
 use crate::consts::*;
-use crate::design_consts::*;
 use bevy::prelude::*;
 
 pub struct InGamePlugin;

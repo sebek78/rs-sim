@@ -1,12 +1,9 @@
 mod consts;
-mod design_consts;
-mod in_game;
+mod game_view;
 mod main_menu;
-mod main_menu_buttons;
 
-use crate::consts::*;
 use bevy::prelude::*;
-use in_game::InGamePlugin;
+use consts::AppState;
 use main_menu::MainMenuPlugin;
 
 fn main() {
@@ -20,6 +17,6 @@ fn main() {
         .add_state(AppState::MainMenu)
         .add_plugins(DefaultPlugins)
         .add_plugin(MainMenuPlugin)
-        .add_plugin(InGamePlugin)
+        .add_plugin(game_view::InGamePlugin)
         .run();
 }

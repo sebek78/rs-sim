@@ -1,6 +1,5 @@
+use super::*;
 use crate::consts::*;
-use crate::design_consts::*;
-use crate::main_menu_buttons::*;
 use bevy::prelude::*;
 
 pub struct MainMenuPlugin;

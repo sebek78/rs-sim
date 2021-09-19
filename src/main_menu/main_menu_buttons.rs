@@ -1,5 +1,4 @@
 use crate::consts::*;
-use crate::design_consts::*;
 use bevy::app::AppExit;
 use bevy::prelude::*;
 
