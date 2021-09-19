@@ -1,6 +1,7 @@
 mod consts;
 mod game_view;
 mod main_menu;
+mod ui;
 
 use bevy::prelude::*;
 use consts::AppState;

@@ -2,9 +2,6 @@ use crate::consts::*;
 use bevy::app::AppExit;
 use bevy::prelude::*;
 
-const NEW_GAME_TEXT: &str = "New game";
-const EXIT_TO_DESKTOP_TEXT: &str = "Exit to desktop";
-
 pub struct ButtonMaterials {
     pub normal: Handle<ColorMaterial>,
     hovered: Handle<ColorMaterial>,
@@ -22,6 +19,9 @@ impl FromWorld for ButtonMaterials {
     }
 }
 
+const NEW_GAME_TEXT: &str = "New game";
+const EXIT_TO_DESKTOP_TEXT: &str = "Exit to desktop";
+
 pub enum MenuButtons {
     NewGame,
     ExitToDesktop,
@@ -34,6 +34,35 @@ impl MenuButtons {
             Self::ExitToDesktop => EXIT_TO_DESKTOP_TEXT.to_string(),
         }
     }
+}
+
+pub fn menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle {
+    return ButtonBundle {
+        style: Style {
+            size: Size::new(Val::Px(160.0), Val::Px(40.0)),
+            margin: Rect::all(Val::Px(8.0)),
+            justify_content: JustifyContent::Center,
+            align_items: AlignItems::Center,
+            ..Default::default()
+        },
+        material: btn_material,
+        ..Default::default()
+    };
+}
+
+pub fn button_label(label: String, font: Handle<Font>) -> TextBundle {
+    return TextBundle {
+        text: Text::with_section(
+            label,
+            TextStyle {
+                font: font,
+                font_size: MENU_BUTTON_TEXT,
+                color: Color::rgb(0.9, 0.9, 0.9),
+            },
+            Default::default(),
+        ),
+        ..Default::default()
+    };
 }
 
 pub fn main_menu_buttons(

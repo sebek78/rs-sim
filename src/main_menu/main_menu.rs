@@ -1,5 +1,6 @@
 use super::*;
 use crate::consts::*;
+use crate::ui::*;
 use bevy::prelude::*;
 
 pub struct MainMenuPlugin;
@@ -34,98 +35,38 @@ fn setup_main_menu(
     mut color_materials: ResMut<Assets<ColorMaterial>>,
     button_materials: Res<ButtonMaterials>,
 ) {
-    let title_font = asset_server.load(MEDIEVAL_REGULAR);
-    let buttons = [MenuButtons::NewGame, MenuButtons::ExitToDesktop];
-
     commands.spawn_bundle(UiCameraBundle::default());
 
+    let title_font = asset_server.load(MEDIEVAL_REGULAR);
+    let font = asset_server.load(LATO_REGULAR);
+    let background_color = color_materials.add(BACKGROUND_DEFAULT.into());
+
+    let root_node = root_node();
+    let title_area = container(100.0, background_color.clone());
+    let title = title(title_font);
+
+    let button_area = container(400.0, background_color.clone());
+    let buttons = [MenuButtons::NewGame, MenuButtons::ExitToDesktop];
+
     commands
-        // root node
-        .spawn_bundle(NodeBundle {
-            style: Style {
-                size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
-                display: Display::Flex,
-                flex_direction: FlexDirection::ColumnReverse,
-                justify_content: JustifyContent::FlexStart,
-                align_items: AlignItems::Center,
-                ..Default::default()
-            },
-            ..Default::default()
-        })
+        .spawn_bundle(root_node)
         .insert(MainMenu)
         .with_children(|parent| {
-            // title
-            parent
-                .spawn_bundle(NodeBundle {
-                    style: Style {
-                        size: Size::new(Val::Percent(100.0), Val::Px(100.0)),
-                        justify_content: JustifyContent::Center,
-                        align_items: AlignItems::Center,
-                        ..Default::default()
-                    },
-                    material: color_materials.add(BACKGROUND_DEFAULT.into()),
-                    ..Default::default()
-                })
-                .with_children(|parent| {
-                    parent.spawn_bundle(TextBundle {
-                        style: Style {
-                            ..Default::default()
-                        },
-                        text: Text::with_section(
-                            "Test Example",
-                            TextStyle {
-                                font: title_font,
-                                font_size: H1_SIZE,
-                                color: PRIMARY_LIGHTER,
-                            },
-                            Default::default(),
-                        ),
-                        ..Default::default()
-                    });
-                });
-            // menu
-            parent
-                .spawn_bundle(NodeBundle {
-                    style: Style {
-                        size: Size::new(Val::Percent(100.0), Val::Px(400.0)),
-                        flex_direction: FlexDirection::ColumnReverse,
-                        justify_content: JustifyContent::Center,
-                        align_items: AlignItems::Center,
-                        ..Default::default()
-                    },
-                    material: color_materials.add(BACKGROUND_DEFAULT.into()),
-                    ..Default::default()
-                })
-                .with_children(|parent| {
-                    for button in buttons {
-                        // menu button
-                        parent
-                            .spawn_bundle(ButtonBundle {
-                                style: Style {
-                                    size: Size::new(Val::Px(160.0), Val::Px(40.0)),
-                                    margin: Rect::all(Val::Px(8.0)),
-                                    justify_content: JustifyContent::Center,
-                                    align_items: AlignItems::Center,
-                                    ..Default::default()
-                                },
-                                material: button_materials.normal.clone(),
-                                ..Default::default()
-                            })
-                            .with_children(|parent| {
-                                parent.spawn_bundle(TextBundle {
-                                    text: Text::with_section(
-                                        button.name(),
-                                        TextStyle {
-                                            font: asset_server.load(LATO_REGULAR),
-                                            font_size: MENU_BUTTON_TEXT,
-                                            color: Color::rgb(0.9, 0.9, 0.9),
-                                        },
-                                        Default::default(),
-                                    ),
-                                    ..Default::default()
-                                });
-                            });
-                    }
-                });
+            parent.spawn_bundle(title_area).with_children(|parent| {
+                parent.spawn_bundle(title);
+            });
+            parent.spawn_bundle(button_area).with_children(|parent| {
+                for button in buttons {
+                    let btn_material = button_materials.normal.clone();
+                    parent
+                        .spawn_bundle(menu_button(btn_material))
+                        .with_children(|parent| {
+                            let label = button.name();
+                            let btn_label = button_label(label, font.clone());
+
+                            parent.spawn_bundle(btn_label);
+                        });
+                }
+            });
         });
 }
