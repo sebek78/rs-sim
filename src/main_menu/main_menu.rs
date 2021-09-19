@@ -7,7 +7,7 @@ pub struct MainMenuPlugin;
 
 impl Plugin for MainMenuPlugin {
     fn build(&self, app: &mut AppBuilder) {
-        app.init_resource::<ButtonMaterials>()
+        app.init_resource::<MenuButtonMaterials>()
             .insert_resource(ClearColor(BACKGROUND_DEFAULT))
             .add_system_set(
                 SystemSet::on_enter(AppState::MainMenu).with_system(setup_main_menu.system()),
@@ -33,7 +33,7 @@ fn setup_main_menu(
     mut commands: Commands,
     asset_server: ResMut<AssetServer>,
     mut color_materials: ResMut<Assets<ColorMaterial>>,
-    button_materials: Res<ButtonMaterials>,
+    button_materials: Res<MenuButtonMaterials>,
 ) {
     commands.spawn_bundle(UiCameraBundle::default());
 

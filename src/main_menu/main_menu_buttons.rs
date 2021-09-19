@@ -1,23 +1,7 @@
 use crate::consts::*;
+use crate::ui::MenuButtonMaterials;
 use bevy::app::AppExit;
 use bevy::prelude::*;
-
-pub struct ButtonMaterials {
-    pub normal: Handle<ColorMaterial>,
-    hovered: Handle<ColorMaterial>,
-    pressed: Handle<ColorMaterial>,
-}
-
-impl FromWorld for ButtonMaterials {
-    fn from_world(world: &mut World) -> Self {
-        let mut materials = world.get_resource_mut::<Assets<ColorMaterial>>().unwrap();
-        ButtonMaterials {
-            normal: materials.add(PRIMARY_DARK.into()),
-            hovered: materials.add(PRIMARY.into()),
-            pressed: materials.add(PRIMARY_LIGHT.into()),
-        }
-    }
-}
 
 const NEW_GAME_TEXT: &str = "New game";
 const EXIT_TO_DESKTOP_TEXT: &str = "Exit to desktop";
@@ -36,7 +20,7 @@ impl MenuButtons {
     }
 }
 
-pub fn menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle {
+pub fn menu_button(material: Handle<ColorMaterial>) -> ButtonBundle {
     return ButtonBundle {
         style: Style {
             size: Size::new(Val::Px(160.0), Val::Px(40.0)),
@@ -45,7 +29,7 @@ pub fn menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle {
             align_items: AlignItems::Center,
             ..Default::default()
         },
-        material: btn_material,
+        material,
         ..Default::default()
     };
 }
@@ -55,7 +39,7 @@ pub fn button_label(label: String, font: Handle<Font>) -> TextBundle {
         text: Text::with_section(
             label,
             TextStyle {
-                font: font,
+                font,
                 font_size: MENU_BUTTON_TEXT,
                 color: Color::rgb(0.9, 0.9, 0.9),
             },
@@ -66,7 +50,7 @@ pub fn button_label(label: String, font: Handle<Font>) -> TextBundle {
 }
 
 pub fn main_menu_buttons(
-    button_materials: Res<ButtonMaterials>,
+    button_materials: Res<MenuButtonMaterials>,
     mut interaction_query: Query<
         (&Interaction, &mut Handle<ColorMaterial>, &Children),
         (Changed<Interaction>, With<Button>),

@@ -1,11 +1,11 @@
 mod consts;
+mod game_menu;
 mod game_view;
 mod main_menu;
 mod ui;
 
 use bevy::prelude::*;
 use consts::AppState;
-use main_menu::MainMenuPlugin;
 
 fn main() {
     App::build()
@@ -17,7 +17,8 @@ fn main() {
         })
         .add_state(AppState::MainMenu)
         .add_plugins(DefaultPlugins)
-        .add_plugin(MainMenuPlugin)
+        .add_plugin(main_menu::MainMenuPlugin)
         .add_plugin(game_view::InGamePlugin)
+        .add_plugin(game_menu::GameMenuPlugin)
         .run();
 }
