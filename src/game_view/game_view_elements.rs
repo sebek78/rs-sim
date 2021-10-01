@@ -2,7 +2,7 @@ use crate::consts::*;
 use bevy::prelude::*;
 
 pub fn top_bar(material: Handle<ColorMaterial>) -> NodeBundle {
-    return NodeBundle {
+    NodeBundle {
         style: Style {
             size: Size::new(Val::Percent(100.0), Val::Px(40.0)),
             display: Display::Flex,
@@ -13,11 +13,11 @@ pub fn top_bar(material: Handle<ColorMaterial>) -> NodeBundle {
         },
         material,
         ..Default::default()
-    };
+    }
 }
 
 pub fn top_bar_menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle {
-    return ButtonBundle {
+    ButtonBundle {
         style: Style {
             size: Size::new(Val::Px(80.0), Val::Px(40.0)),
             margin: Rect::all(Val::Px(16.0)),
@@ -27,11 +27,11 @@ pub fn top_bar_menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle 
         },
         material: btn_material,
         ..Default::default()
-    };
+    }
 }
 
 pub fn top_bar_button_label(label: String, font: Handle<Font>, color: Color) -> TextBundle {
-    return TextBundle {
+    TextBundle {
         text: Text::with_section(
             label,
             TextStyle {
@@ -42,11 +42,11 @@ pub fn top_bar_button_label(label: String, font: Handle<Font>, color: Color) -> 
             Default::default(),
         ),
         ..Default::default()
-    };
+    }
 }
 
 pub fn time_label(label: String, font: Handle<Font>, color: Color) -> TextBundle {
-    return TextBundle {
+    TextBundle {
         text: Text::with_section(
             label,
             TextStyle {
@@ -61,5 +61,5 @@ pub fn time_label(label: String, font: Handle<Font>, color: Color) -> TextBundle
             ..Default::default()
         },
         ..Default::default()
-    };
+    }
 }

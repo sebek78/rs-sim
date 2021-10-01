@@ -2,7 +2,7 @@ use crate::consts::*;
 use bevy::prelude::*;
 
 pub fn title(title_font: Handle<Font>) -> TextBundle {
-    return TextBundle {
+    TextBundle {
         style: Style {
             ..Default::default()
         },
@@ -16,5 +16,5 @@ pub fn title(title_font: Handle<Font>) -> TextBundle {
             Default::default(),
         ),
         ..Default::default()
-    };
+    }
 }

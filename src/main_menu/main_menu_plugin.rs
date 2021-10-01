@@ -41,11 +41,11 @@ fn setup_main_menu(
     let font = asset_server.load(LATO_REGULAR);
     let background_color = color_materials.add(BACKGROUND_DEFAULT.into());
 
-    let root_node = root_node();
+    let root_node = root_node(background_color.clone());
     let title_area = container(100.0, background_color.clone());
     let title = title(title_font);
 
-    let button_area = container(400.0, background_color.clone());
+    let button_area = container(400.0, background_color);
     let buttons = [MenuButtons::NewGame, MenuButtons::ExitToDesktop];
 
     commands

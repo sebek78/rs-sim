@@ -1,9 +1,10 @@
 use crate::consts::*;
-use crate::ui::*;
 use bevy::app::AppExit;
+
+use crate::ui::*;
 use bevy::prelude::*;
 
-pub fn main_menu_buttons(
+pub fn game_menu_buttons(
     button_materials: Res<MenuButtonMaterials>,
     mut interaction_query: Query<
         (&Interaction, &mut Handle<ColorMaterial>, &Children),
@@ -21,7 +22,10 @@ pub fn main_menu_buttons(
             Interaction::Clicked => {
                 *material = button_materials.pressed.clone();
                 match target {
-                    text if text == NEW_GAME_TEXT => app_state.set(AppState::InGame).unwrap(),
+                    text if text == RESUME_TEXT => app_state.set(AppState::InGame).unwrap(),
+                    text if text == EXIT_TO_MAIN_MENU_TEXT => {
+                        app_state.set(AppState::MainMenu).unwrap()
+                    }
                     text if text == EXIT_TO_DESKTOP_TEXT => exit.send(AppExit),
                     _ => (),
                 }

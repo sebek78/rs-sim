@@ -1,3 +1,4 @@
+use super::MENU_TEXT;
 use crate::consts::*;
 use bevy::prelude::*;
 
@@ -31,14 +32,12 @@ pub fn game_view_buttons(
         let button = text_query.get_mut(children[0]).unwrap();
         let target = &button.sections[0].value[..];
 
-        println!("{}", target);
-
         match *interaction {
             Interaction::Clicked => {
                 *material = top_bar_button_materials.pressed.clone();
                 match target {
-                    MENU_TEXT => app_state.set(AppState::GameMenu).unwrap(),
-                    _ => unreachable!(),
+                    text if text == MENU_TEXT => app_state.set(AppState::GameMenu).unwrap(),
+                    _ => (),
                 }
             }
             Interaction::Hovered => {

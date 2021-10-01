@@ -1,5 +1,5 @@
-pub use self::consts::AppState;
+pub use self::constants::*;
 pub use self::design_consts::*;
 
-mod consts;
+mod constants;
 mod design_consts;
