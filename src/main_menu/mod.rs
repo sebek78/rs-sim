@@ -1,7 +1,7 @@
-pub use self::main_menu_buttons::*;
-pub use self::main_menu_elements::*;
-pub use self::main_menu_plugin::MainMenuPlugin;
+pub use self::buttons::*;
+pub use self::elements::*;
+pub use self::plugin::MainMenuPlugin;
 
-mod main_menu_buttons;
-mod main_menu_elements;
-mod main_menu_plugin;
+mod buttons;
+mod elements;
+mod plugin;

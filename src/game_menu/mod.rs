@@ -1,7 +1,9 @@
-pub use self::game_menu_buttons::*;
-pub use self::game_menu_elements::*;
-pub use self::game_menu_plugin::*;
+pub use self::buttons::*;
+pub use self::elements::*;
+pub use self::keyboard_inputs::keyboard_inputs;
+pub use self::plugin::*;
 
-mod game_menu_buttons;
-mod game_menu_elements;
-mod game_menu_plugin;
+mod buttons;
+mod elements;
+mod keyboard_inputs;
+mod plugin;

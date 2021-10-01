@@ -14,6 +14,9 @@ impl Plugin for GameMenuPlugin {
                 SystemSet::on_update(AppState::GameMenu).with_system(game_menu_buttons.system()),
             )
             .add_system_set(
+                SystemSet::on_update(AppState::GameMenu).with_system(keyboard_inputs.system()),
+            )
+            .add_system_set(
                 SystemSet::on_exit(AppState::GameMenu).with_system(despawn_game_menu.system()),
             );
     }

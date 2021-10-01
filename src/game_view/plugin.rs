@@ -15,6 +15,9 @@ impl Plugin for InGamePlugin {
                 SystemSet::on_update(AppState::InGame).with_system(game_view_buttons.system()),
             )
             .add_system_set(
+                SystemSet::on_update(AppState::InGame).with_system(keyboard_inputs.system()),
+            )
+            .add_system_set(
                 SystemSet::on_exit(AppState::InGame).with_system(despawn_game_view.system()),
             );
     }
