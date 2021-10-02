@@ -40,7 +40,7 @@ pub fn setup_game_menu(
     let primary_lighter = color_materials.add(PRIMARY_LIGHT.into());
     let font = asset_server.load(LATO_REGULAR);
 
-    let layer_node = layer_node(background_color);
+    let root_node = root_node(background_color, JustifyContent::Center);
     let button_wrapper = paper(200.0, 200.0, primary_lighter);
 
     let buttons = [
@@ -50,7 +50,7 @@ pub fn setup_game_menu(
     ];
 
     commands
-        .spawn_bundle(layer_node)
+        .spawn_bundle(root_node)
         .insert(GameMenu)
         .with_children(|parent| {
             parent.spawn_bundle(button_wrapper).with_children(|parent| {

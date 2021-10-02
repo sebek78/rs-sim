@@ -1,6 +1,10 @@
-use super::MENU_TEXT;
 use crate::consts::*;
+use crate::resources::Turn;
+use crate::ui::CustomId;
 use bevy::prelude::*;
+
+pub const MENU_TEXT: &str = "Menu";
+pub const NEXT_TURN: &str = "Next turn";
 
 pub struct TopBarButtonMaterials {
     normal: Handle<ColorMaterial>,
@@ -25,8 +29,10 @@ pub fn game_view_buttons(
         (&Interaction, &mut Handle<ColorMaterial>, &Children),
         (Changed<Interaction>, With<Button>),
     >,
-    mut text_query: Query<&mut Text>,
+    mut text_query: Query<&mut Text, Without<CustomId>>,
     mut app_state: ResMut<State<AppState>>,
+    mut turn: ResMut<Turn>,
+    mut time_label_query: Query<&mut Text, With<CustomId>>,
 ) {
     for (interaction, mut material, children) in interaction_query.iter_mut() {
         let button = text_query.get_mut(children[0]).unwrap();
@@ -37,6 +43,12 @@ pub fn game_view_buttons(
                 *material = top_bar_button_materials.pressed.clone();
                 match target {
                     text if text == MENU_TEXT => app_state.set(AppState::GameMenu).unwrap(),
+                    text if text == NEXT_TURN => {
+                        turn.next_turn();
+                        for mut time_label in time_label_query.iter_mut() {
+                            time_label.sections[0].value = turn.label.clone();
+                        }
+                    }
                     _ => (),
                 }
             }

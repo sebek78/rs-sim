@@ -1,7 +1,7 @@
 use crate::consts::*;
 use bevy::prelude::*;
 
-pub fn top_bar(material: Handle<ColorMaterial>) -> NodeBundle {
+pub fn create_bar(material: Handle<ColorMaterial>) -> NodeBundle {
     NodeBundle {
         style: Style {
             size: Size::new(Val::Percent(100.0), Val::Px(40.0)),
@@ -16,7 +16,7 @@ pub fn top_bar(material: Handle<ColorMaterial>) -> NodeBundle {
     }
 }
 
-pub fn top_bar_menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle {
+pub fn bar_menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle {
     ButtonBundle {
         style: Style {
             size: Size::new(Val::Px(80.0), Val::Px(40.0)),
@@ -30,7 +30,7 @@ pub fn top_bar_menu_button(btn_material: Handle<ColorMaterial>) -> ButtonBundle 
     }
 }
 
-pub fn top_bar_button_label(label: String, font: Handle<Font>, color: Color) -> TextBundle {
+pub fn bar_button_label(label: String, font: Handle<Font>, color: Color) -> TextBundle {
     TextBundle {
         text: Text::with_section(
             label,

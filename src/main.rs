@@ -2,6 +2,7 @@ mod consts;
 mod game_menu;
 mod game_view;
 mod main_menu;
+mod resources;
 mod ui;
 
 use bevy::prelude::*;
@@ -9,6 +10,7 @@ use consts::AppState;
 
 fn main() {
     App::build()
+        .insert_resource(Msaa { samples: 4 })
         .insert_resource(WindowDescriptor {
             title: "TEST".to_string(),
             width: 640.0,

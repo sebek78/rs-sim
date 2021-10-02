@@ -17,3 +17,7 @@ impl FromWorld for MenuButtonMaterials {
         }
     }
 }
+
+pub struct CustomId {
+    pub id: String,
+}

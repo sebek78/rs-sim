@@ -1,12 +1,12 @@
 use bevy::prelude::*;
 
-pub fn root_node(material: Handle<ColorMaterial>) -> NodeBundle {
+pub fn root_node(material: Handle<ColorMaterial>, justify_content: JustifyContent) -> NodeBundle {
     NodeBundle {
         style: Style {
             size: Size::new(Val::Percent(100.0), Val::Percent(100.0)),
             display: Display::Flex,
             flex_direction: FlexDirection::ColumnReverse,
-            justify_content: JustifyContent::FlexStart,
+            justify_content,
             align_items: AlignItems::Center,
             ..Default::default()
         },

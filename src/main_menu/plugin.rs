@@ -41,7 +41,7 @@ fn setup_main_menu(
     let font = asset_server.load(LATO_REGULAR);
     let background_color = color_materials.add(BACKGROUND_DEFAULT.into());
 
-    let root_node = root_node(background_color.clone());
+    let root_node = root_node(background_color.clone(), JustifyContent::FlexStart);
     let title_area = container(100.0, background_color.clone());
     let title = title(title_font);
 
